@@ -9,6 +9,7 @@ import 'todos_list_page.dart';
 
 class DataInputScreen extends StatefulWidget {
   const DataInputScreen({Key? key}) : super(key: key);
+  static const String routeName = 'Data-Entry-Page';
 
   @override
   State<DataInputScreen> createState() => _DataInputScreenState();
@@ -32,6 +33,7 @@ class _DataInputScreenState extends State<DataInputScreen> {
     TodoItem newTask = TodoItem(
       id: Todos.todos.length,
       title: _titleFieldController.text,
+      description: _descriptionFieldController.text,
       isCompleted: false,
     );
 
@@ -43,40 +45,49 @@ class _DataInputScreenState extends State<DataInputScreen> {
     return Scaffold(
       backgroundColor: Colors.white,
       appBar: AppBar(
+        // backgroundColor: Colors.black,
         centerTitle: true,
         title: const Text('Data Entry Screen'),
         actions: [
           IconButton(
             onPressed: () {
-              Navigator.push(
-    context,
-    MaterialPageRoute(builder: (context) =>  const TodoListPage()),
-  );
+              Navigator.pushNamed(context, TodoListPage.routeName);
             },
-            icon: const Icon(Icons.check_box),
-            iconSize: 30,
+            icon: const Icon(Icons.check_circle),
+            iconSize: 25,
           ),
         ],
       ),
       body: Column(
         mainAxisAlignment: MainAxisAlignment.center,
         children: [
-          Center(
-            child: Image.asset(Images.dataimage),
+          const Text(
+            'Life should not be reduced to a to do list',
+            style: TextStyle(
+              fontSize: 22,
+              fontFamily: 'Pacifico',
+              color: Colors.blue,
+            ),
           ),
           SizedBox(
-            width: 350,
+            height: 10,
+          ),
+          Center(
+            child: Image.asset(Images.dataimage, width: 150),
+          ),
+          SizedBox(
+            width: 330,
             child: TextField(
               controller: _titleFieldController,
               decoration: const InputDecoration(
                   border: OutlineInputBorder(), labelText: 'Title'),
             ),
           ),
-          SizedBox(
+          const SizedBox(
             height: 24,
           ),
           SizedBox(
-            width: 350,
+            width: 330,
             child: TextField(
               controller: _descriptionFieldController,
               decoration: const InputDecoration(
@@ -89,6 +100,8 @@ class _DataInputScreenState extends State<DataInputScreen> {
               color: Colors.blue,
               onPressed: () {
                 addToTodos();
+                _descriptionFieldController.clear();
+                _titleFieldController.clear();
               },
               child: const Text(
                 'Add',
