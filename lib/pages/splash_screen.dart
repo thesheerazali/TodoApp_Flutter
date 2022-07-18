@@ -31,12 +31,31 @@ class _SplashScreenState extends State<SplashScreen> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-        body: Center(
-      child: Image.asset(
-        Images.logo,
-        height: 150,
+      backgroundColor: const Color.fromARGB(255, 225, 237, 247),
+      body: Center(
+        child: Column(
+          mainAxisAlignment: MainAxisAlignment.center,
+          children: [
+            Image.asset(
+              Images.splash,
+              height: 300,
+            ),
+            Padding(
+              padding: const EdgeInsets.only(bottom: 50),
+              child: Text(
+                'Life should not be reduced to a to do list',
+                style: TextStyle(
+                  fontSize: 22,
+                  fontFamily: 'Pacifico',
+                  color: Colors.blue.shade600,
+                ),
+              ),
+            ),
+          ],
+        ),
+        
       ),
-    ));
+    );
   }
 }
 
