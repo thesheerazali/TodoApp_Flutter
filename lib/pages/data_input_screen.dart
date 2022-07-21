@@ -1,10 +1,13 @@
 // ignore_for_file: deprecated_member_use
 
 import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
 
+import '../components/todos_count_button.dart';
 import '../constants/images.dart';
-import '../data/todos.dart';
+
 import '../models/todo.dart';
+import '../providers/todo_list_provider.dart';
 import 'todos_list_page.dart';
 
 class DataInputScreen extends StatefulWidget {
@@ -29,16 +32,16 @@ class _DataInputScreenState extends State<DataInputScreen> {
   }
 
   // method to add todoItem in todo list
-  void addToTodos() {
-    TodoItem newTask = TodoItem(
-      id: Todos.todos.length,
-      title: _titleFieldController.text,
-      description: _descriptionFieldController.text,
-      isCompleted: false,
-    );
+  // void addToTodos() {
+  //   TodoItem newTask = TodoItem(
+  //     id: Todos.todos.length,
+  //     title: _titleFieldController.text,
+  //     description: _descriptionFieldController.text,
+  //     isCompleted: false,
+  //   );
 
-    Todos.todos.add(newTask);
-  }
+  //   Todos.todos.add(newTask);
+  // }
 
   @override
   Widget build(BuildContext context) {
@@ -47,33 +50,16 @@ class _DataInputScreenState extends State<DataInputScreen> {
       appBar: AppBar(
         // backgroundColor: Colors.black,
         centerTitle: true,
-        title: const Text('Data Entry Screen'),
-        actions: [
-          IconButton(
-            onPressed: () {
-              Navigator.pushNamed(context, TodoListPage.routeName);
-            },
-            icon: const Icon(Icons.check_circle),
-            iconSize: 25,
-          ),
+        title: const Text('Add Your Todo\'s'),
+        actions: const [
+         TodosCountButton(),
         ],
       ),
       body: Column(
         mainAxisAlignment: MainAxisAlignment.center,
         children: [
-          const Text(
-            'Life should not be reduced to a to do list',
-            style: TextStyle(
-              fontSize: 22,
-              fontFamily: 'Pacifico',
-              color: Colors.blue,
-            ),
-          ),
-          SizedBox(
-            height: 10,
-          ),
           Center(
-            child: Image.asset(Images.dataimage, width: 150),
+            child: Image.asset(Images.dataimage, width: 200),
           ),
           SizedBox(
             width: 330,
@@ -99,7 +85,17 @@ class _DataInputScreenState extends State<DataInputScreen> {
             child: FlatButton(
               color: Colors.blue,
               onPressed: () {
-                addToTodos();
+                TodoItem newTask = TodoItem(
+                  id: Provider.of<TodoListProvider>(context, listen: false)
+                      .todoList
+                      .length,
+                  title: _titleFieldController.text,
+                  isCompleted: false,
+                  description: _descriptionFieldController.text,
+                );
+                Provider.of<TodoListProvider>(context, listen: false)
+                    .addTodo(newTask: newTask);
+
                 _descriptionFieldController.clear();
                 _titleFieldController.clear();
               },
@@ -108,7 +104,7 @@ class _DataInputScreenState extends State<DataInputScreen> {
                 style: TextStyle(fontSize: 16, color: Colors.white),
               ),
             ),
-          )
+          ),
         ],
       ),
     );
