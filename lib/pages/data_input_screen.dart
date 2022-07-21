@@ -98,6 +98,15 @@ class _DataInputScreenState extends State<DataInputScreen> {
 
                 _descriptionFieldController.clear();
                 _titleFieldController.clear();
+
+
+
+                showDialog(context: context, builder:(context) {
+                return const AlertDialog(
+                   title: Text("Todo"),
+                   content: Text("Added successfully"),
+                );
+               });
               },
               child: const Text(
                 'Add',
