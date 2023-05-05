@@ -31,7 +31,7 @@ class _DataInputScreenState extends State<DataInputScreen> {
     _descriptionFieldController.dispose();
   }
 
-  // method to add todoItem in todo list
+ // method to add todoItem in todo list
   // void addToTodos() {
   //   TodoItem newTask = TodoItem(
   //     id: Todos.todos.length,
@@ -80,37 +80,43 @@ class _DataInputScreenState extends State<DataInputScreen> {
                   border: OutlineInputBorder(), labelText: 'Description'),
             ),
           ),
-          Padding(
-            padding: const EdgeInsets.all(12.0),
-            child: FlatButton(
-              color: Colors.blue,
-              onPressed: () {
-                TodoItem newTask = TodoItem(
-                  id: Provider.of<TodoListProvider>(context, listen: false)
-                      .todoList
-                      .length,
-                  title: _titleFieldController.text,
-                  isCompleted: false,
-                  description: _descriptionFieldController.text,
-                );
-                Provider.of<TodoListProvider>(context, listen: false)
-                    .addTodo(newTask: newTask);
-
-                _descriptionFieldController.clear();
-                _titleFieldController.clear();
-
-
-
-                showDialog(context: context, builder:(context) {
-                return const AlertDialog(
-                   title: Text("Todo"),
-                   content: Text("Added successfully"),
-                );
-               });
-              },
-              child: const Text(
-                'Add',
-                style: TextStyle(fontSize: 16, color: Colors.white),
+          Consumer<TodoListProvider>(builder: (context, listProvider, child) => 
+             Padding(
+              padding: const EdgeInsets.all(12.0),
+              child: ElevatedButton(
+                style: ElevatedButton.styleFrom(
+                  primary: Colors.purple,
+                //  padding: EdgeInsets.symmetric(horizontal: 50, vertical: 20),
+                  textStyle: const TextStyle(
+                  fontSize: 30,
+                  fontWeight: FontWeight.bold)),              
+                onPressed: () {
+                  TodoItem newTask = TodoItem(
+                    id: 
+                        listProvider.todoList
+                        .length,
+                    title: _titleFieldController.text,
+                    isCompleted: false,
+                    description: _descriptionFieldController.text,
+                  );
+                 listProvider.addTodo(newTask: newTask);
+          
+                  _descriptionFieldController.clear();
+                  _titleFieldController.clear();
+          
+          
+          
+                  showDialog(context: context, builder:(context) {
+                  return const AlertDialog(
+                     title: Text("Todo"),
+                     content: Text("Added successfully"),
+                  );
+                 });
+                },
+                child: const Text(
+                  'Add',
+                  style: TextStyle(fontSize: 16, color: Colors.white),
+                ),
               ),
             ),
           ),

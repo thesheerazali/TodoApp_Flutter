@@ -1,4 +1,4 @@
-class TodoItem {
+ class TodoItem {
   int id;
   String title;
   String description;
