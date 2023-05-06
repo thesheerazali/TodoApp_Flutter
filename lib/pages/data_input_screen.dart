@@ -49,9 +49,15 @@ class _DataInputScreenState extends State<DataInputScreen> {
     return Scaffold(
       backgroundColor: Colors.white,
       appBar: AppBar(
-        // backgroundColor: Colors.black,
+        backgroundColor: Colors.cyan,
         centerTitle: true,
-        title: const Text('Add Your Todo\'s'),
+        title: const Text(
+          'Add Your Todo\'s',
+          style: TextStyle(
+            color: Colors.black,
+            fontWeight: FontWeight.bold,
+          ),
+        ),
         actions: const [
           TodosCountButton(),
         ],
@@ -100,16 +106,46 @@ class _DataInputScreenState extends State<DataInputScreen> {
                 padding: const EdgeInsets.all(12.0),
                 child: ElevatedButton(
                   style: ElevatedButton.styleFrom(
-                      primary: Colors.purple,
+                      primary: Colors.cyan,
                       //  padding: EdgeInsets.symmetric(horizontal: 50, vertical: 20),
                       textStyle: const TextStyle(
                           fontSize: 30, fontWeight: FontWeight.bold)),
                   onPressed: () {
-                   
+                    if (_formKey.currentState!.validate()) {
+                      TodoItem newTask = TodoItem(
+                        id: listProvider.todoList.length,
+                        title: _titleFieldController.text,
+                        isCompleted: false,
+                        description: _descriptionFieldController.text,
+                      );
+                      listProvider.addTodo(newTask: newTask);
+
+                      _descriptionFieldController.clear();
+                      _titleFieldController.clear();
+
+                      showDialog(
+                          context: context,
+                          builder: (context) {
+                            return const AlertDialog(
+                              title: Text("Todo"),
+                              content: Text("Added successfully"),
+                            );
+                          });
+                    } else {
+                      showDialog(
+                          context: context,
+                          builder: (context) {
+                            return const AlertDialog(
+                              title: Text("Todo"),
+                              content: Text(
+                                  "You must have to add Todo Name and desc..! "),
+                            );
+                          });
+                    }
                   },
                   child: const Text(
                     'Add',
-                    style: TextStyle(fontSize: 16, color: Colors.white),
+                    style: TextStyle(fontSize: 16, color: Colors.black),
                   ),
                 ),
               ),

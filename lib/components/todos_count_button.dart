@@ -14,33 +14,39 @@ class TodosCountButton extends StatelessWidget {
     return Stack(
       //  alignment: Alignment.topRight,
       children: [
-        IconButton(
-          icon: const Icon(
-            Icons.check_box_outlined,
-            size: 30,
+        Padding(
+          padding: const EdgeInsets.only(right: 12),
+          child: IconButton(
+            icon: const Icon(
+              Icons.check_box_outlined,
+              size: 40,
+              color: Colors.black,
+            ),
+            onPressed: () {
+              Navigator.pushNamed(context, TodoListPage.routeName);
+            },
           ),
-          onPressed: () {
-            Navigator.pushNamed(context, TodoListPage.routeName);
-          },
         ),
         Padding(
-          padding: const EdgeInsets.only(left: 24, top: 5),
+          padding: const EdgeInsets.only(left: 30, top: 5),
           child: Container(
-            height: 20,
-            width: 20,
-            decoration: const BoxDecoration(
-              color: Colors.black,
+            height: 23,
+            width: 23,
+            decoration: BoxDecoration(
+              color: Colors.cyan,
               shape: BoxShape.circle,
+              border: Border.all(color: Colors.black, width: 2),
             ),
             child: Center(
               child: Consumer<TodoListProvider>(
                 builder: (context, value, child) => Text(
                   value.todoList.length.toString(),
                   style: const TextStyle(
-                    fontWeight: FontWeight.bold,
-                    fontSize: 15,
-                    // color: Colors.blueGrey,
-                  ),
+                      fontWeight: FontWeight.bold,
+                      fontSize: 16,
+                      color: Colors.black
+                      // color: Colors.blueGrey,
+                      ),
                 ),
               ),
             ),

@@ -37,10 +37,9 @@ class _TodoListPageState extends State<TodoListPage> {
                                 motion: StretchMotion(),
                                 children: [
                                   SlidableAction(
-                                    backgroundColor: Colors.red,
-                                    icon: Icons.delete,
-                                    onPressed: (context) => print("Deleted"),
-                                  ),
+                                      backgroundColor: Colors.red,
+                                      icon: Icons.delete,
+                                      onPressed: (context) => print('Print')),
                                   SlidableAction(
                                     backgroundColor: Colors.blueGrey,
                                     icon: Icons.update_sharp,
