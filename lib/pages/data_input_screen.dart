@@ -23,6 +23,7 @@ class _DataInputScreenState extends State<DataInputScreen> {
 
   final TextEditingController _descriptionFieldController =
       TextEditingController();
+  final _formKey = GlobalKey<FormState>();
 
   @override
   void dispose() {
@@ -31,7 +32,7 @@ class _DataInputScreenState extends State<DataInputScreen> {
     _descriptionFieldController.dispose();
   }
 
- // method to add todoItem in todo list
+  // method to add todoItem in todo list
   // void addToTodos() {
   //   TodoItem newTask = TodoItem(
   //     id: Todos.todos.length,
@@ -52,75 +53,69 @@ class _DataInputScreenState extends State<DataInputScreen> {
         centerTitle: true,
         title: const Text('Add Your Todo\'s'),
         actions: const [
-         TodosCountButton(),
+          TodosCountButton(),
         ],
       ),
-      body: Column(
-        mainAxisAlignment: MainAxisAlignment.center,
-        children: [
-          Center(
-            child: Image.asset(Images.dataimage, width: 200),
-          ),
-          SizedBox(
-            width: 330,
-            child: TextField(
-              controller: _titleFieldController,
-              decoration: const InputDecoration(
-                  border: OutlineInputBorder(), labelText: 'Title'),
+      body: Form(
+        key: _formKey,
+        child: Column(
+          mainAxisAlignment: MainAxisAlignment.center,
+          children: [
+            Center(
+              child: Image.asset(Images.dataimage, width: 200),
             ),
-          ),
-          const SizedBox(
-            height: 24,
-          ),
-          SizedBox(
-            width: 330,
-            child: TextField(
-              controller: _descriptionFieldController,
-              decoration: const InputDecoration(
-                  border: OutlineInputBorder(), labelText: 'Description'),
-            ),
-          ),
-          Consumer<TodoListProvider>(builder: (context, listProvider, child) => 
-             Padding(
-              padding: const EdgeInsets.all(12.0),
-              child: ElevatedButton(
-                style: ElevatedButton.styleFrom(
-                  primary: Colors.purple,
-                //  padding: EdgeInsets.symmetric(horizontal: 50, vertical: 20),
-                  textStyle: const TextStyle(
-                  fontSize: 30,
-                  fontWeight: FontWeight.bold)),              
-                onPressed: () {
-                  TodoItem newTask = TodoItem(
-                    id: 
-                        listProvider.todoList
-                        .length,
-                    title: _titleFieldController.text,
-                    isCompleted: false,
-                    description: _descriptionFieldController.text,
-                  );
-                 listProvider.addTodo(newTask: newTask);
-          
-                  _descriptionFieldController.clear();
-                  _titleFieldController.clear();
-          
-          
-          
-                  showDialog(context: context, builder:(context) {
-                  return const AlertDialog(
-                     title: Text("Todo"),
-                     content: Text("Added successfully"),
-                  );
-                 });
+            SizedBox(
+              width: 330,
+              child: TextFormField(
+                controller: _titleFieldController,
+                decoration: const InputDecoration(
+                    border: OutlineInputBorder(), labelText: 'Title'),
+                validator: (value) {
+                  if (value!.isEmpty) {
+                    return "userName Can Not be Empty";
+                  }
+                  return null;
                 },
-                child: const Text(
-                  'Add',
-                  style: TextStyle(fontSize: 16, color: Colors.white),
+              ),
+            ),
+            const SizedBox(
+              height: 24,
+            ),
+            SizedBox(
+              width: 330,
+              child: TextFormField(
+                controller: _descriptionFieldController,
+                decoration: const InputDecoration(
+                    border: OutlineInputBorder(), labelText: 'Description'),
+                validator: (value) {
+                  if (value!.isEmpty) {
+                    return "userName Can Not be Empty";
+                  }
+                  return null;
+                },
+              ),
+            ),
+            Consumer<TodoListProvider>(
+              builder: (context, listProvider, child) => Padding(
+                padding: const EdgeInsets.all(12.0),
+                child: ElevatedButton(
+                  style: ElevatedButton.styleFrom(
+                      primary: Colors.purple,
+                      //  padding: EdgeInsets.symmetric(horizontal: 50, vertical: 20),
+                      textStyle: const TextStyle(
+                          fontSize: 30, fontWeight: FontWeight.bold)),
+                  onPressed: () {
+                   
+                  },
+                  child: const Text(
+                    'Add',
+                    style: TextStyle(fontSize: 16, color: Colors.white),
+                  ),
                 ),
               ),
             ),
-          ),
-        ],
+          ],
+        ),
       ),
     );
   }
