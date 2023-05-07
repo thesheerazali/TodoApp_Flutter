@@ -3,7 +3,7 @@ import 'package:flutter_slidable/flutter_slidable.dart';
 import 'package:provider/provider.dart';
 
 import '../components/todos_ListTile_widget.dart';
-import '../components/updateTodoDialog.dart';
+import '../components/update_Todo_Dialog.dart';
 import '../providers/todo_list_provider.dart';
 
 class TodoListPage extends StatefulWidget {
@@ -15,7 +15,7 @@ class TodoListPage extends StatefulWidget {
 }
 
 class _TodoListPageState extends State<TodoListPage> {
-  bool _initialValue = false;
+
 
   @override
   Widget build(BuildContext context) {
@@ -39,13 +39,13 @@ class _TodoListPageState extends State<TodoListPage> {
                 children: [
                   Expanded(
                     child: Padding(
-                      padding: EdgeInsets.all(8.0),
+                      padding: const EdgeInsets.all(8.0),
                       child: ListView.builder(
                           itemCount: todosListProvider.todoList.length,
                           itemBuilder: (context, index) {
                             return Slidable(
                               endActionPane: ActionPane(
-                                motion: StretchMotion(),
+                                motion: const StretchMotion(),
                                 children: [
                                   SlidableAction(
                                     backgroundColor: Colors.red,
@@ -64,7 +64,7 @@ class _TodoListPageState extends State<TodoListPage> {
                                   SlidableAction(
                                     backgroundColor: Colors.green,
                                     icon: Icons.done_all,
-                                    onPressed: (context) => print("Deleted"),
+                                    onPressed: (context) =>  print("Deleted"),
                                   ),
                                 ],
                               ),

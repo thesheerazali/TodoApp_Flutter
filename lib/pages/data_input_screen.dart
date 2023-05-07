@@ -8,7 +8,6 @@ import '../constants/images.dart';
 
 import '../models/todo.dart';
 import '../providers/todo_list_provider.dart';
-import 'todos_list_page.dart';
 
 class DataInputScreen extends StatefulWidget {
   const DataInputScreen({Key? key}) : super(key: key);

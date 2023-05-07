@@ -28,7 +28,7 @@ class _SplashScreenState extends State<SplashScreen> {
   Widget build(BuildContext context) {
     return Scaffold(
       // backgroundColor: const Color.fromARGB(255, 225, 237, 247),
-      backgroundColor: Color(0xFFDDF0F6),
+      backgroundColor: const Color(0xFFDDF0F6),
       body: Center(
         child: Image.asset(
           Images.splash,

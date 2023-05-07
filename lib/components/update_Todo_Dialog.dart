@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 
-import '../models/todo.dart';
 import '../providers/todo_list_provider.dart';
 
 // class UpdateListTile extends StatefulWidget {
@@ -25,11 +24,11 @@ class UpdateTodoList {
   final TextEditingController _descriptionFieldControllerUpdate =
       TextEditingController();
 
-  Future updateData(context,index) {
+  Future updateData(context, index) {
     return showDialog(
       context: context,
       builder: (context) => AlertDialog(
-        title: Text("Update Your Todo"),
+        title: const Text("Update Your Todo"),
         actions: [
           TextFormField(
             controller: _titleFieldControllerUpdate,
@@ -48,7 +47,6 @@ class UpdateTodoList {
                     ),
                     child: ElevatedButton(
                         onPressed: () {
-                        
                           Card(
                             elevation: 2,
                             color: Colors.cyan,

@@ -28,7 +28,7 @@ class MyApp extends StatelessWidget {
         initialRoute: SplashScreen.routeName,
         routes: {
           SplashScreen.routeName: (context) => const SplashScreen(),
-          DataInputScreen.routeName: (context) => DataInputScreen(),
+          DataInputScreen.routeName: (context) => const DataInputScreen(),
           TodoListPage.routeName: (context) => const TodoListPage(),
         }));
   }
