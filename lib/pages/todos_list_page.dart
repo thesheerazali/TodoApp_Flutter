@@ -15,11 +15,10 @@ class TodoListPage extends StatefulWidget {
 }
 
 class _TodoListPageState extends State<TodoListPage> {
-
-
   @override
   Widget build(BuildContext context) {
     UpdateTodoList updateTodoList = UpdateTodoList();
+    TodoListTile todoListTile = TodoListTile();
     return Consumer<TodoListProvider>(
       builder: ((context, todosListProvider, child) => SafeArea(
             child: Scaffold(
@@ -58,18 +57,17 @@ class _TodoListPageState extends State<TodoListPage> {
                                   SlidableAction(
                                     backgroundColor: Colors.blueGrey,
                                     icon: Icons.update_sharp,
-                                    onPressed: (context) =>
-                                        updateTodoList.updateData(context,index),
+                                    onPressed: (context) => updateTodoList
+                                        .updateData(context, index),
                                   ),
                                   SlidableAction(
                                     backgroundColor: Colors.green,
                                     icon: Icons.done_all,
-                                    onPressed: (context) =>  print("Deleted"),
+                                    onPressed: (context) => print("Deleted"),
                                   ),
                                 ],
                               ),
-                              child: TodoListTile.listTileTodo(context, index),
-                            
+                              child: todoListTile.listTileTodo(context, index),
                             );
                           }),
                     ),

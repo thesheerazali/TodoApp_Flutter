@@ -111,6 +111,7 @@ class _DataInputScreenState extends State<DataInputScreen> {
                         textStyle: const TextStyle(
                             fontSize: 30, fontWeight: FontWeight.bold)),
                     onPressed: () {
+                      listProvider.check = true;
                       if (_formKey.currentState!.validate()) {
                         TodoItem newTask = TodoItem(
                           id: listProvider.todoList.length,

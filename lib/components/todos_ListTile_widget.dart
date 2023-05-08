@@ -1,4 +1,4 @@
-
+// ignore_for_file: public_member_api_docs, sort_constructors_first
 // import 'package:provider/provider.dart';
 // import 'package:todolist/providers/todo_list_provider.dart';
 
@@ -24,11 +24,12 @@
 
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
+import 'package:todolist/components/titke_decs.dart';
 
 import '../providers/todo_list_provider.dart';
 
 class TodoListTile {
-  static Widget listTileTodo(context, index) {
+  listTileTodo(context, index) {
     return Consumer<TodoListProvider>(
         builder: (context, todosListProvider, child) => Card(
               elevation: 2,
@@ -42,21 +43,31 @@ class TodoListTile {
                     size: 30,
                   ),
                 ),
-                title: Text(
-                  todosListProvider.todoList[index].title,
-                  style: const TextStyle(
-                    color: Colors.black,
-                    fontSize: 20,
-                    fontWeight: FontWeight.bold,
-                  ),
-                ),
-                subtitle: Text(
-                  todosListProvider.todoList[index].description,
-                  style: const TextStyle(
-                    color: Colors.black,
-                    fontSize: 16,
-                  ),
-                ),
+
+                title: todosListProvider.check! ? TitleDesc.titleWidget(
+                  todosListProvider.todoList[index].title) : TitleDesc.titleWidget(
+                  todosListProvider.updateTodoList[index].titleUp),
+             
+                //  Text(
+
+                //   todosListProvider.todoList[index].title,
+                //   style: const TextStyle(
+                //     color: Colors.black,
+                //     fontSize: 20,
+                //     fontWeight: FontWeight.bold,
+                //   ),
+                // ),
+                subtitle:todosListProvider.check! ? TitleDesc.titleWidget(
+                  todosListProvider.todoList[index].description) : TitleDesc.titleWidget(
+                  todosListProvider.updateTodoList[index].descriptionUp),
+
+                // Text(
+                //    todosListProvider.todoList[index].description,
+                //   style: const TextStyle(
+                //     color: Colors.black,
+                //     fontSize: 16,
+                //   ),
+                // ),
                 trailing: Padding(
                   padding: const EdgeInsets.all(16.0),
                   child: Text(
