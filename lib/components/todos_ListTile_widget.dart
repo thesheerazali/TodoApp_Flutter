@@ -26,10 +26,16 @@ import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'package:todolist/components/titke_decs.dart';
 
+import '../providers/text_controller_provider.dart';
 import '../providers/todo_list_provider.dart';
 
 class TodoListTile {
+  
+
+
+
   listTileTodo(context, index) {
+    final textControler = Provider.of<TextControlerProvider>(context, listen: false);
     return Consumer<TodoListProvider>(
         builder: (context, todosListProvider, child) => Card(
               elevation: 2,
@@ -43,10 +49,10 @@ class TodoListTile {
                     size: 30,
                   ),
                 ),
-
+                         
                 title: todosListProvider.check! ? TitleDesc.titleWidget(
                   todosListProvider.todoList[index].title) : TitleDesc.titleWidget(
-                  todosListProvider.updateTodoList[index].titleUp),
+                 textControler.titleFieldControllerUpdate.text ),
              
                 //  Text(
 
@@ -59,7 +65,7 @@ class TodoListTile {
                 // ),
                 subtitle:todosListProvider.check! ? TitleDesc.titleWidget(
                   todosListProvider.todoList[index].description) : TitleDesc.titleWidget(
-                  todosListProvider.updateTodoList[index].descriptionUp),
+                   textControler.descriptionFieldControllerUpdate.text),
 
                 // Text(
                 //    todosListProvider.todoList[index].description,

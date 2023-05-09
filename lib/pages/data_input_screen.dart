@@ -7,6 +7,7 @@ import '../components/todos_count_button.dart';
 import '../constants/images.dart';
 
 import '../models/todo.dart';
+import '../providers/text_controller_provider.dart';
 import '../providers/todo_list_provider.dart';
 
 class DataInputScreen extends StatefulWidget {
@@ -18,18 +19,15 @@ class DataInputScreen extends StatefulWidget {
 }
 
 class _DataInputScreenState extends State<DataInputScreen> {
-  final TextEditingController _titleFieldController = TextEditingController();
-
-  final TextEditingController _descriptionFieldController =
-      TextEditingController();
+ 
   final _formKey = GlobalKey<FormState>();
 
-  @override
-  void dispose() {
-    super.dispose();
-    _titleFieldController.dispose();
-    _descriptionFieldController.dispose();
-  }
+  // @override
+  // void dispose() {
+  //   super.dispose();
+  //   textControlProvider.titleFieldController.dispose();
+  //   _descriptionFieldController.dispose();
+  // }
 
   // method to add todoItem in todo list
   // void addToTodos() {
@@ -45,6 +43,8 @@ class _DataInputScreenState extends State<DataInputScreen> {
 
   @override
   Widget build(BuildContext context) {
+    final textControlProvider =
+        Provider.of<TextControlerProvider>(context, listen: false);
     return Scaffold(
       backgroundColor: Colors.white,
       appBar: AppBar(
@@ -73,7 +73,7 @@ class _DataInputScreenState extends State<DataInputScreen> {
               SizedBox(
                 width: 330,
                 child: TextFormField(
-                  controller: _titleFieldController,
+                  controller: textControlProvider.titleFieldController,
                   decoration: const InputDecoration(
                       border: OutlineInputBorder(), labelText: 'Title'),
                   validator: (value) {
@@ -90,7 +90,7 @@ class _DataInputScreenState extends State<DataInputScreen> {
               SizedBox(
                 width: 330,
                 child: TextFormField(
-                  controller: _descriptionFieldController,
+                  controller: textControlProvider.descriptionFieldController,
                   decoration: const InputDecoration(
                       border: OutlineInputBorder(), labelText: 'Description'),
                   validator: (value) {
@@ -115,14 +115,14 @@ class _DataInputScreenState extends State<DataInputScreen> {
                       if (_formKey.currentState!.validate()) {
                         TodoItem newTask = TodoItem(
                           id: listProvider.todoList.length,
-                          title: _titleFieldController.text,
+                          title: textControlProvider.titleFieldController.text,
                           isCompleted: false,
-                          description: _descriptionFieldController.text,
+                          description: textControlProvider.descriptionFieldController.text,
                         );
                         listProvider.addTodo(newTask: newTask);
 
-                        _descriptionFieldController.clear();
-                        _titleFieldController.clear();
+                        textControlProvider.descriptionFieldController.clear();
+                        textControlProvider.titleFieldController.clear();
 
                         showDialog(
                             context: context,
